@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(registry:HKEY_CURRENT_USER\SOFTWARE\Akisystems\akibld@Sources)akibld-con.props" />
+  </ImportGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3DF747E8-AB1B-443A-AB11-072EE2ED8E21}</ProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <PreBuildEvent>
+      <Command>$(ProjectName).pre.bat "$(SolutionPath)" "$(IntDir)" "$(OutDir)"</Command>
+      <Message>Running $(ProjectName).pre.bat . . .</Message>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>$(ProjectName).post.bat "$(SolutionPath)" "$(IntDir)" "$(OutDir)"</Command>
+      <Message>Running $(ProjectName).post.bat . . .</Message>
+    </PostBuildEvent>
+    <ClCompile>
+      <DisableSpecificWarnings>4018;4057;4100;4244;4456;4459;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="$(ProjectName).pre.bat" />
+    <None Include="$(ProjectName).post.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\frame.h" />
+    <ClInclude Include="src\mp3asm.h" />
+    <ClInclude Include="src\parse.h" />
+    <ClInclude Include="src\stream.h" />
+    <ClInclude Include="src\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\frame.c" />
+    <ClCompile Include="src\mp3asm.c" />
+    <ClCompile Include="src\parse.c" />
+    <ClCompile Include="src\stream.c" />
+    <ClCompile Include="src\tag.c" />
+    <ClCompile Include="src\utils.c" />
+  </ItemGroup>
+</Project>
